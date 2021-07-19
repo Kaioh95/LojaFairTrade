@@ -14,7 +14,9 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
-        <datasource-mapping />
+        <datasource-mapping>
+          <factory-entry name="LojaFairTrade" value="e2874d51-d384-4e39-8aae-1f43cfc56753" />
+        </datasource-mapping>
         <naming-strategy-map />
       </configuration>
     </facet>
