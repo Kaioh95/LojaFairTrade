@@ -5,6 +5,8 @@ import com.app.LojaFairTrade.service.ProdutoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "api/v1/fairtradedata/produto")
 @AllArgsConstructor
@@ -17,7 +19,7 @@ public class ProdutoController {
         return produtoService.adicionarProduto(produto);
     }
 
-    @GetMapping(path="/{id}")
+    @GetMapping(path = "/{id}")
     public Produto retornaProduto(@RequestParam Long id){
         return produtoService.lerProduto(id);
     }
@@ -27,8 +29,19 @@ public class ProdutoController {
         return produtoService.atualizarProduto(produto);
     }
 
-    @DeleteMapping(path="/{id}")
+    @DeleteMapping(path = "/{id}")
     public Produto removeProduto(@RequestParam Long id){
         return produtoService.removerProduto(id);
     }
+
+    @GetMapping(path = "/search")
+    public List<Produto> pesquisaPorNome(@RequestParam("nome") String nome){
+        return produtoService.pesquisarNome(nome);
+    }
+
+    @GetMapping(path = "/menores-precos")
+    public List<Produto> comparadorPrecos(){
+        return produtoService.compararPrecos();
+    }
+
 }

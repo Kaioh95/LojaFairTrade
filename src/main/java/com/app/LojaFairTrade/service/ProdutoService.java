@@ -5,6 +5,8 @@ import com.app.LojaFairTrade.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class ProdutoService {
@@ -49,5 +51,13 @@ public class ProdutoService {
         } else {
             return "O produto especificado não existe no sistema";
         }
+    }
+
+    public List<Produto> pesquisarNome(String nome){
+        return produtoRepository.findByNome(nome);
+    }
+
+    public List<Produto> compararPrecos(){
+        return produtoRepository.ordernarPorPreco();
     }
 }
