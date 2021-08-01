@@ -21,7 +21,7 @@ public class ProdutoController {
     }
 
     @GetMapping(path = "/{id}")
-    public Produto retornaProduto(@RequestParam Long id){
+    public Produto retornaProduto(@PathVariable("id") Long id){
         return produtoService.lerProduto(id);
     }
 
@@ -31,7 +31,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public Produto removeProduto(@RequestParam Long id){
+    public Produto removeProduto(@PathVariable("id") Long id){
         return produtoService.removerProduto(id);
     }
 
@@ -50,7 +50,7 @@ public class ProdutoController {
         return produtoService.todosProdutos();
     }
 
-    @GetMapping(path = "/categoria")
+    @GetMapping(path = "/categorias/")
     public List<Produto> listarPorCategoria(@RequestParam("categoria") ProdutoCategoria categoria){
         return produtoService.listarCategoria(categoria);
     }
