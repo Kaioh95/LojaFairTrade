@@ -1,6 +1,5 @@
 package com.app.LojaFairTrade.entity;
 
-import com.app.LojaFairTrade.service.AppUserService;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,9 +31,11 @@ public class Produto {
     private ProdutoCategoria categoria;
     private String descricao;
     private float preco;
-    private float desconto;
+    private float desconto; // Intervalo [0, 1]
 
     private long idUsuario;
+    @Transient
+    private float precoComDesconto;
 
     public Produto(String nome, ProdutoCategoria categoria, String descricao, float preco, float desconto, long idUsuario){
         this.categoria = categoria;
@@ -66,4 +67,7 @@ public class Produto {
         return this.categoria;
     }
 
+    public float getPrecoComDesconto() {
+        return preco - preco * desconto;
+    }
 }

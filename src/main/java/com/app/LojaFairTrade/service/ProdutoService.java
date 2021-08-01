@@ -1,6 +1,7 @@
 package com.app.LojaFairTrade.service;
 
 import com.app.LojaFairTrade.entity.Produto;
+import com.app.LojaFairTrade.entity.ProdutoCategoria;
 import com.app.LojaFairTrade.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,9 @@ public class ProdutoService {
 
         if(!produtoExists){
             try{
+                if(produto.getDesconto()<0 || produto.getDesconto() > 1) {
+                    return "Desconto fora do intervalo aceito";
+                }
                 produtoRepository.save(produto);
                 return "Produto cadastrado com sucesso";
             }catch(Exception ex){
@@ -59,5 +63,13 @@ public class ProdutoService {
 
     public List<Produto> compararPrecos(){
         return produtoRepository.ordernarPorPreco();
+    }
+
+    public List<Produto> todosProdutos(){
+        return produtoRepository.findAll();
+    }
+
+    public List<Produto> listarCategoria(ProdutoCategoria categoria){
+        return produtoRepository.findByCategoria(categoria);
     }
 }
