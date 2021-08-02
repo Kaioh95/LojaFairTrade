@@ -4,7 +4,11 @@ import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.entity.ProdutoCategoria;
 import com.app.LojaFairTrade.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+import reactor.core.publisher.Mono;
 
 import java.util.List;
 
@@ -13,6 +17,8 @@ import java.util.List;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    @Autowired
+    private WebClient webClient;
 
     public String adicionarProduto(Produto produto){
         boolean produtoExists = produtoRepository.findById(produto.getId()).isPresent();
@@ -20,7 +26,7 @@ public class ProdutoService {
         if(!produtoExists){
             try{
                 if(produto.getDesconto()<0 || produto.getDesconto() > 1) {
-                    return "Desconto fora do intervalo aceito";
+                    return "Desconto fora do intervalo aceito [0, 1]";
                 }
                 produtoRepository.save(produto);
                 return "Produto cadastrado com sucesso";
@@ -50,6 +56,9 @@ public class ProdutoService {
         boolean produtoExists = produtoRepository.findById(produto.getId()).isPresent();
 
         if(produtoExists) {
+            if(produto.getDesconto()<0 || produto.getDesconto() > 1) {
+                return "Desconto fora do intervalo aceito [0, 1]";
+            }
             produtoRepository.save(produto);
             return "Produto atualizado";
         } else {
@@ -73,7 +82,17 @@ public class ProdutoService {
         return produtoRepository.findByCategoria(categoria);
     }
 
-    public List<Produto> listarTodos() {
-        return produtoRepository.findAll();
+    public String calcularFrete(Long codigoProduto, Long cepDestino){
+        Mono<String> monoCorreios = this.webClient.method(HttpMethod.GET).uri("?nCdEmpresa={1}&sDsSenha={2}&sCepOrigem={3}&sCepDestino={4}&nVlPeso={5}&nCdFormato={6}&nVlComprimento={7}&nVlAltura={8}&nVlLargura={9}&sCdMaoPropria={10}&nVlValorDeclarado={11}&sCdAvisoRecebimento={12}&nCdServico={13}&nVlDiametro={14}&StrRetorno={15}&nIndicaCalculo={16}",
+                        "08082650", "564321", "70002900", cepDestino, "1", "1", "20", "20", "20", "n", "0", "n", "04510", "0", "xml", "3")
+                .retrieve()
+                .bodyToMono(String.class);
+
+        monoCorreios.subscribe(sCorreios -> {
+            System.out.println("Finalizado");
+        });
+
+        String servicoCorreios = monoCorreios.block();
+        return servicoCorreios;
     }
 }

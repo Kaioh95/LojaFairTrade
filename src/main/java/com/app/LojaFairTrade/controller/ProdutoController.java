@@ -35,11 +35,6 @@ public class ProdutoController {
         return produtoService.removerProduto(id);
     }
 
-    @GetMapping(path = "/")
-    public List<Produto> listarTodos(){
-        return produtoService.listarTodos();
-    }
-
     @GetMapping(path = "/search")
     public List<Produto> pesquisaPorNome(@RequestParam("nome") String nome){
         return produtoService.pesquisarNome(nome);
@@ -58,6 +53,12 @@ public class ProdutoController {
     @GetMapping(path = "/categorias/")
     public List<Produto> listarPorCategoria(@RequestParam("categoria") ProdutoCategoria categoria){
         return produtoService.listarCategoria(categoria);
+    }
+
+    @GetMapping(path = "/frete/{id}")
+    public String calcularFrete(@PathVariable("id") Long id
+            , @RequestParam("cepDestino") Long cepDestino){
+        return produtoService.calcularFrete(id, cepDestino);
     }
 
 }

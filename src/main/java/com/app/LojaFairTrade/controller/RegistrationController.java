@@ -21,7 +21,7 @@ public class RegistrationController {
         return registrationService.register(request);
     }
 
-    @GetMapping(path = "/")
+    @GetMapping(path = "/listUsers")
     public List<AppUser> listarTodos(){
         return appUserService.listarTodos();
     }
