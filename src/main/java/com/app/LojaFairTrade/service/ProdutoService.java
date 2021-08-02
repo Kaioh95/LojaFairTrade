@@ -14,6 +14,7 @@ import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 @AllArgsConstructor
@@ -90,8 +91,10 @@ public class ProdutoService {
     }
 
     public String calcularFrete(Long codigoProduto, Long cepDestino){
+        Produto produto = produtoRepository.findById(codigoProduto).get();
+
         Mono<String> monoCorreios = this.webClient.method(HttpMethod.GET).uri("?nCdEmpresa={1}&sDsSenha={2}&sCepOrigem={3}&sCepDestino={4}&nVlPeso={5}&nCdFormato={6}&nVlComprimento={7}&nVlAltura={8}&nVlLargura={9}&sCdMaoPropria={10}&nVlValorDeclarado={11}&sCdAvisoRecebimento={12}&nCdServico={13}&nVlDiametro={14}&StrRetorno={15}&nIndicaCalculo={16}",
-                        "08082650", "564321", "70002900", cepDestino, "1", "1", "20", "20", "20", "n", "0", "n", "04510", "0", "xml", "3")
+                        null, null, produto.getCepOrigem(), cepDestino, produto.getPeso(), "1", produto.getComprimento(), produto.getAltura(), produto.getLargura(), "n", "0", "n", "04510", "0", "xml", "3")
                 .retrieve()
                 .bodyToMono(String.class);
 

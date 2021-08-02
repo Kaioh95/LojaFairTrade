@@ -5,7 +5,7 @@ server:
 
 spring:
   datasource:
-    password: admin
+    password: root
     url: jdbc:postgresql://localhost:5432/fairtradedata
     username: postgres
   jpa:

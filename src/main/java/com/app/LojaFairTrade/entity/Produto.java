@@ -42,6 +42,12 @@ public class Produto {
     @Transient
     private float precoComDesconto;
 
+    private Long cepOrigem;
+    private float peso;
+    private float comprimento;
+    private float altura;
+    private float largura;
+
     public Produto(String nome, ProdutoCategoria categoria, String descricao, float preco,
                    float desconto, AppUser usuarioProduto){
         this.categoria = categoria;
@@ -53,24 +59,21 @@ public class Produto {
         this.usuarioProduto = usuarioProduto;
     }
 
-    public String getNome(){
-        return this.nome;
-    }
+    public Produto(String nome, ProdutoCategoria categoria, String descricao, float preco,
+                   float desconto, AppUser usuarioProduto, Long cepOrigem, float peso,
+                   float comprimento, float altura, float largura){
+        this.categoria = categoria;
+        this.nome = nome;
+        this.desconto = desconto;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.cepOrigem = cepOrigem;
+        this.peso = peso;
+        this.comprimento = comprimento;
+        this.altura = altura;
+        this.largura = largura;
 
-    public String getDescricao(){
-        return this.descricao;
-    }
-
-    public float getPreco(){
-        return this.preco;
-    }
-
-    public float getDesconto(){
-        return this.desconto;
-    }
-
-    public ProdutoCategoria getCategoria(){
-        return this.categoria;
+        this.usuarioProduto = usuarioProduto;
     }
 
     public float getPrecoComDesconto() {
