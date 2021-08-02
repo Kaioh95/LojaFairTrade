@@ -1,7 +1,9 @@
 package com.app.LojaFairTrade.service;
 
+import com.app.LojaFairTrade.entity.AppUser;
 import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.entity.ProdutoCategoria;
+import com.app.LojaFairTrade.repository.AppUserRepository;
 import com.app.LojaFairTrade.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,28 +13,33 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
+    private final AppUserRepository appUserRepository;
     @Autowired
     private WebClient webClient;
 
     public String adicionarProduto(Produto produto){
-        boolean produtoExists = produtoRepository.findById(produto.getId()).isPresent();
-
-        if(!produtoExists){
-            try{
-                if(produto.getDesconto()<0 || produto.getDesconto() > 1) {
-                    return "Desconto fora do intervalo aceito [0, 1]";
-                }
-                produtoRepository.save(produto);
-                return "Produto cadastrado com sucesso";
-            }catch(Exception ex){
-                ex.printStackTrace();
+        AppUser userExists;
+        try{
+            userExists = appUserRepository.findById(produto.getIdUser()).get();
+        }catch(NoSuchElementException ex){
+            return "Não existe tal usuário";
+        }
+        produto.setUsuarioProduto(userExists);
+        try{
+            if(produto.getDesconto()<0 || produto.getDesconto() > 1) {
+                return "Desconto fora do intervalo aceito [0, 1]";
             }
+            produtoRepository.save(produto);
+            return "Produto cadastrado com sucesso";
+        }catch(Exception ex){
+            ex.printStackTrace();
         }
         return "Erro ao cadastrar produto";
     }

@@ -2,6 +2,7 @@ package com.app.LojaFairTrade.service;
 
 import com.app.LojaFairTrade.entity.AppUser;
 import com.app.LojaFairTrade.entity.ConfirmationToken;
+import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.repository.AppUserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.UUID;
 
 @Service
@@ -35,6 +37,22 @@ public class AppUserService implements UserDetailsService {
 
     public List<AppUser> listarTodos(){
         return appUserRepository.findAll();
+    }
+
+    public AppUser findById(Long id){
+        return appUserRepository.findById(id).orElseThrow();
+    }
+
+
+    public String atualizarUsuario(AppUser usuario){
+        boolean userExists = appUserRepository.findById(usuario.getId()).isPresent();
+
+        if(userExists) {
+            appUserRepository.save(usuario);
+            return "Usuário atualizado";
+        } else {
+            return "O usuário especificado não existe no sistema";
+        }
     }
 
     public String singUpUser(AppUser appUser){

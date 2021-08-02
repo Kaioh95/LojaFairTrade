@@ -25,27 +25,22 @@ public class Avaliacao {
     )
     private long id;
 
+    @Transient
+    private Long idUser;
+
     @ManyToOne
-    private AppUser idUsuarioAvaliado;
+    private AppUser usuarioAvaliado;
     private float nota;
     private String textoAvaliacao;
 
-    public Avaliacao(AppUser idUsuarioAvaliado, float nota, String textoAvaliacao){
-        this.idUsuarioAvaliado = idUsuarioAvaliado;
+    public Avaliacao(AppUser usuarioAvaliado, float nota, String textoAvaliacao){
+        this.usuarioAvaliado = usuarioAvaliado;
         this.nota = nota;
         this.textoAvaliacao = textoAvaliacao;
     }
 
     public Long getId(){
         return this.id;
-    }
-
-    public AppUser getIdUsuarioAvaliado() {
-        return idUsuarioAvaliado;
-    }
-
-    public void setIdUsuarioAvaliado(AppUser idUsuarioAvaliado) {
-        this.idUsuarioAvaliado = idUsuarioAvaliado;
     }
 
     public float getNota() {

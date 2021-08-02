@@ -21,9 +21,14 @@ public class RegistrationController {
         return registrationService.register(request);
     }
 
-    @GetMapping(path = "/listUsers")
+    @GetMapping(path = "/")
     public List<AppUser> listarTodos(){
         return appUserService.listarTodos();
+    }
+
+    @PutMapping(path = "/{id}")
+    public String atualizarUser(@RequestBody AppUser usuario){
+        return appUserService.atualizarUsuario(usuario);
     }
 
     @GetMapping(path = "confirm")

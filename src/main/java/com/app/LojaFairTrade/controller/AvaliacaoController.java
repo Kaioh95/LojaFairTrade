@@ -1,6 +1,8 @@
 package com.app.LojaFairTrade.controller;
 
+import com.app.LojaFairTrade.entity.AppUser;
 import com.app.LojaFairTrade.entity.Avaliacao;
+import com.app.LojaFairTrade.service.AppUserService;
 import com.app.LojaFairTrade.service.AvaliacaoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

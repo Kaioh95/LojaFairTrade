@@ -1,7 +1,9 @@
 package com.app.LojaFairTrade.controller;
 
+import com.app.LojaFairTrade.entity.AppUser;
 import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.entity.ProdutoCategoria;
+import com.app.LojaFairTrade.service.AppUserService;
 import com.app.LojaFairTrade.service.ProdutoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;

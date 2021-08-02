@@ -33,18 +33,24 @@ public class Produto {
     private float preco;
     private float desconto; // Intervalo [0, 1]
 
-    private long idUsuario;
+    @Transient
+    private Long idUser;
+
+    @ManyToOne
+    private AppUser usuarioProduto;
+
     @Transient
     private float precoComDesconto;
 
-    public Produto(String nome, ProdutoCategoria categoria, String descricao, float preco, float desconto, long idUsuario){
+    public Produto(String nome, ProdutoCategoria categoria, String descricao, float preco,
+                   float desconto, AppUser usuarioProduto){
         this.categoria = categoria;
         this.nome = nome;
         this.desconto = desconto;
         this.descricao = descricao;
         this.preco = preco;
 
-        this.idUsuario = idUsuario;
+        this.usuarioProduto = usuarioProduto;
     }
 
     public String getNome(){
