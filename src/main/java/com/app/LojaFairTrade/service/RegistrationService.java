@@ -22,25 +22,39 @@ public class RegistrationService {
     public String register(RegistrationRequest request) {
         boolean isValidEmail =  emailValidator.
                 test(request.getEmail());
+        try{
+            if(!isValidEmail){
+                throw new IllegalStateException("O email digitado não é válido.");
+            }
+        }catch(IllegalStateException ex){
+            System.out.println("Erro: "+ex.getMessage());
+            return ex.getMessage();
+        }
+        String token;
+        try {
+            token = appUserService.singUpUser(
+                    new AppUser(
+                            request.getFirstName(),
+                            request.getLastName(),
+                            request.getEmail(),
+                            request.getPassword(),
+                            AppUserRole.USER
 
-        if(!isValidEmail){
-            throw new IllegalStateException("email not valid");
+                    )
+            );
+        }catch(Exception ex){
+            return "O email enviado já está cadastrado no sistema";
         }
 
-        String token = appUserService.singUpUser(
-                new AppUser(
-                        request.getFirstName(),
-                        request.getLastName(),
-                        request.getEmail(),
-                        request.getPassword(),
-                        AppUserRole.USER
+        try{
+            String link = "htpp://localhost:8080/api/v1/fairtradedata/confirm?token=" + token;
+            emailSender.send(
+                    request.getEmail(),
+                    buildEmail(request.getFirstName(), link));
+        }catch(Exception ex){
+            System.out.println("O servidor de email ainda não está configurado");
+        }
 
-                )
-        );
-        String link = "htpp://localhost:8080/api/v1/fairtradedata/confirm?token=" + token;
-        emailSender.send(
-                request.getEmail(),
-                buildEmail(request.getFirstName(), link));
         return token;
     }
 

@@ -35,6 +35,11 @@ public class ProdutoController {
         return produtoService.removerProduto(id);
     }
 
+    @GetMapping(path = "/")
+    public List<Produto> listarTodos(){
+        return produtoService.listarTodos();
+    }
+
     @GetMapping(path = "/search")
     public List<Produto> pesquisaPorNome(@RequestParam("nome") String nome){
         return produtoService.pesquisarNome(nome);

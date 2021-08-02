@@ -72,4 +72,8 @@ public class ProdutoService {
     public List<Produto> listarCategoria(ProdutoCategoria categoria){
         return produtoRepository.findByCategoria(categoria);
     }
+
+    public List<Produto> listarTodos() {
+        return produtoRepository.findAll();
+    }
 }
