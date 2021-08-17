@@ -39,23 +39,7 @@ public class Avaliacao {
         this.textoAvaliacao = textoAvaliacao;
     }
 
-    public Long getId(){
-        return this.id;
-    }
-
     public float getNota() {
         return nota;
-    }
-
-    public void setNota(float nota) {
-        this.nota = nota;
-    }
-
-    public String getTextoAvaliacao() {
-        return textoAvaliacao;
-    }
-
-    public void setTextoAvaliacao(String textoAvaliacao) {
-        this.textoAvaliacao = textoAvaliacao;
     }
 }

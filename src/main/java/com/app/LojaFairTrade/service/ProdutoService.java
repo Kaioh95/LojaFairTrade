@@ -1,6 +1,7 @@
 package com.app.LojaFairTrade.service;
 
 import com.app.LojaFairTrade.entity.AppUser;
+import com.app.LojaFairTrade.entity.AppUserRole;
 import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.entity.ProdutoCategoria;
 import com.app.LojaFairTrade.repository.AppUserRepository;
@@ -32,6 +33,14 @@ public class ProdutoService {
         }catch(NoSuchElementException ex){
             return "Não existe tal usuário";
         }
+
+        try {
+            if (userExists.getAppUserRole() != AppUserRole.SHOP)
+                throw new IllegalAccessException();
+        }catch(IllegalAccessException e){
+            return "Operação Ilegal: Não é possível cadastrar produto";
+        }
+
         produto.setUsuarioProduto(userExists);
         try{
             if(produto.getDesconto()<0 || produto.getDesconto() > 1) {

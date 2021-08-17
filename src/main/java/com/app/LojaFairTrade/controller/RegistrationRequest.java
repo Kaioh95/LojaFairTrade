@@ -1,5 +1,6 @@
 package com.app.LojaFairTrade.controller;
 
+import com.app.LojaFairTrade.entity.AppUserRole;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -14,4 +15,5 @@ public class RegistrationRequest {
     private final String lastName;
     private final String email;
     private final String password;
+    private final AppUserRole role;
 }
