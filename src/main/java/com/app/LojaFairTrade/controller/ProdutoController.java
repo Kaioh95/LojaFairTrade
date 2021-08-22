@@ -10,12 +10,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "api/v1/fairtradedata/produto")
+//@RestController
+//@RequestMapping(path = "api/v1/fairtradedata/produto")
 @AllArgsConstructor
-public class ProdutoController {
+public abstract class ProdutoController {
 
-    private final ProdutoService produtoService;
+    protected final ProdutoService produtoService;
 
     @PostMapping()
     public String criarProduto(@RequestBody Produto produto){
@@ -42,25 +42,5 @@ public class ProdutoController {
         return produtoService.pesquisarNome(nome);
     }
 
-    @GetMapping(path = "/menores-precos")
-    public List<Produto> comparadorPrecos(){
-        return produtoService.compararPrecos();
-    }
-
-    @GetMapping(path = "/todos-produtos")
-    public List<Produto> mostrarTodosProdutos(){
-        return produtoService.todosProdutos();
-    }
-
-    @GetMapping(path = "/categorias/")
-    public List<Produto> listarPorCategoria(@RequestParam("categoria") ProdutoCategoria categoria){
-        return produtoService.listarCategoria(categoria);
-    }
-
-    @GetMapping(path = "/frete/{id}")
-    public String calcularFrete(@PathVariable("id") Long id
-            , @RequestParam("cepDestino") Long cepDestino){
-        return produtoService.calcularFrete(id, cepDestino);
-    }
 
 }
