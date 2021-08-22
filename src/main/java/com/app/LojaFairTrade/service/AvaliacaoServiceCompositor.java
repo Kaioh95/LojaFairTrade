@@ -1,0 +1,49 @@
+package com.app.LojaFairTrade.service;
+
+import com.app.LojaFairTrade.entity.AppUser;
+import com.app.LojaFairTrade.entity.Avaliacao;
+import com.app.LojaFairTrade.repository.AppUserRepository;
+import com.app.LojaFairTrade.repository.AvaliacaoRepository;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+
+@Service
+@AllArgsConstructor
+public class AvaliacaoServiceCompositor implements AvaliacaoServiceInterface {
+
+    private final AvaliacaoRepository avaliacaoRepository;
+    private final AppUserRepository appUserRepository;
+
+    public String adicionarAvaliacao(Avaliacao avaliacao) {
+        AppUser userExists;
+        try {
+            userExists = appUserRepository.findById(avaliacao.getIdUser()).get();
+        } catch (NoSuchElementException ex) {
+            return "Não existe tal usuário";
+        }
+        avaliacao.setUsuarioAvaliado(userExists);
+        try {
+            if (avaliacao.getTextoAvaliacao().length() > 255) {
+                return "Texto de avaliação maior que 255 caracteres.";
+            } else if (avaliacao.getNota() > 5 || avaliacao.getNota() < 0) {
+                return "A nota deve ser entre 0 e 5.";
+            }
+            avaliacaoRepository.save(avaliacao);
+            return "Avaliação cadastrada com sucesso";
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return "Erro ao cadastrar avaliação";
+    }
+
+    public List<Avaliacao> listarTodosPorId(Long id){
+        return avaliacaoRepository.findAllById(id);
+    }
+
+    public List<Avaliacao> listarTodos(){
+        return avaliacaoRepository.findAll();
+    }
+}

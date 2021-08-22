@@ -14,28 +14,10 @@ import java.util.NoSuchElementException;
 @AllArgsConstructor
 public class AvaliacaoService {
     private final AvaliacaoRepository avaliacaoRepository;
-    private final AppUserRepository appUserRepository;
+    private final AvaliacaoServiceInterface avaliacaoServiceInterface;
 
     public String adicionarAvaliacao(Avaliacao avaliacao) {
-        AppUser userExists;
-        try {
-            userExists = appUserRepository.findById(avaliacao.getIdUser()).get();
-        } catch (NoSuchElementException ex) {
-            return "Não existe tal usuário";
-        }
-        avaliacao.setUsuarioAvaliado(userExists);
-        try {
-            if (avaliacao.getTextoAvaliacao().length() > 255) {
-                return "Texto de avaliação maior que 255 caracteres.";
-            } else if (avaliacao.getNota() > 5 || avaliacao.getNota() < 0) {
-                return "A nota deve ser entre 0 e 5.";
-            }
-            avaliacaoRepository.save(avaliacao);
-            return "Avaliação cadastrada com sucesso";
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        return "Erro ao cadastrar avaliação";
+        return avaliacaoServiceInterface.adicionarAvaliacao(avaliacao);
     }
 
     public Avaliacao lerAvaliacao(Long id){
@@ -65,10 +47,10 @@ public class AvaliacaoService {
     }
 
     public List<Avaliacao> listarTodosPorId(Long id){
-        return avaliacaoRepository.findAllById(id);
+        return avaliacaoServiceInterface.listarTodosPorId(id);
     }
 
     public List<Avaliacao> listarTodos(){
-        return avaliacaoRepository.findAll();
+        return avaliacaoServiceInterface.listarTodos();
     }
 }

@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ProdutoServiceInterface {
 
+    public String adicionarProduto(Produto produto);
+
     public List<Produto> pesquisarNome(String nome);
 
     public List<Produto> compararPrecos();

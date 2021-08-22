@@ -1,17 +1,10 @@
 package com.app.LojaFairTrade.service;
 
-import com.app.LojaFairTrade.entity.AppUser;
-import com.app.LojaFairTrade.entity.AppUserRole;
 import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.entity.ProdutoCategoria;
-import com.app.LojaFairTrade.repository.AppUserRepository;
 import com.app.LojaFairTrade.repository.ProdutoRepository;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -22,11 +15,10 @@ import java.util.Optional;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
-    private final AppUserRepository appUserRepository;
-    private final ProdutoServiceCompositor produtoServiceCompositor;
+    private final ProdutoServiceInterface produtoServiceInterface;
 
     public String adicionarProduto(Produto produto){
-        return produtoServiceCompositor.adicionarProduto(produto);
+        return produtoServiceInterface.adicionarProduto(produto);
     }
 
     public Produto lerProduto(Long id){
@@ -59,22 +51,22 @@ public class ProdutoService {
     }
 
     public List<Produto> pesquisarNome(String nome){
-        return produtoServiceCompositor.pesquisarNome(nome);
+        return produtoServiceInterface.pesquisarNome(nome);
     }
 
     public List<Produto> compararPrecos(){
-        return produtoServiceCompositor.compararPrecos();
+        return produtoServiceInterface.compararPrecos();
     }
 
     public List<Produto> todosProdutos(){
-        return produtoServiceCompositor.todosProdutos();
+        return produtoServiceInterface.todosProdutos();
     }
 
     public List<Produto> listarCategoria(ProdutoCategoria categoria){
-        return produtoServiceCompositor.listarCategoria(categoria);
+        return produtoServiceInterface.listarCategoria(categoria);
     }
 
     public String calcularFrete(Long codigoProduto, Long cepDestino){
-        return produtoServiceCompositor.calcularFrete(codigoProduto, cepDestino);
+        return produtoServiceInterface.calcularFrete(codigoProduto, cepDestino);
     }
 }

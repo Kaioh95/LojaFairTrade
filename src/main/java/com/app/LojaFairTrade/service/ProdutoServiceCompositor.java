@@ -1,7 +1,6 @@
 package com.app.LojaFairTrade.service;
 
 import com.app.LojaFairTrade.entity.AppUser;
-import com.app.LojaFairTrade.entity.AppUserRole;
 import com.app.LojaFairTrade.entity.Produto;
 import com.app.LojaFairTrade.entity.ProdutoCategoria;
 import com.app.LojaFairTrade.repository.AppUserRepository;
