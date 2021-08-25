@@ -46,11 +46,19 @@ public class AvaliacaoService {
         }
     }
 
-    public List<Avaliacao> listarTodosPorId(Long id){
-        return avaliacaoServiceInterface.listarTodosPorId(id);
+    public List<Avaliacao> listarAvaliacoesPorIDAvaliando(Long id){
+        return avaliacaoServiceInterface.listarAvaliacoesPorIDAvaliando(id);
+    }
+
+    public List<Avaliacao> listarAvaliacoesPorIDAvaliado(Long id){
+        return avaliacaoServiceInterface.listarAvaliacoesPorIDAvaliado(id);
     }
 
     public List<Avaliacao> listarTodos(){
         return avaliacaoServiceInterface.listarTodos();
+    }
+
+    public String mediaPonderada(Long id){
+        return avaliacaoServiceInterface.mediaPonderada(id);
     }
 }

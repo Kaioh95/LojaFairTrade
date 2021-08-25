@@ -8,7 +8,11 @@ public interface AvaliacaoServiceInterface {
 
     public String adicionarAvaliacao(Avaliacao avaliacao);
 
-    public List<Avaliacao> listarTodosPorId(Long id);
+    public List<Avaliacao> listarAvaliacoesPorIDAvaliando(Long id);
+
+    public List<Avaliacao> listarAvaliacoesPorIDAvaliado(Long id);
 
     public List<Avaliacao> listarTodos();
+
+    public String mediaPonderada(Long id);
 }

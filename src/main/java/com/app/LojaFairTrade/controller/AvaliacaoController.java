@@ -39,4 +39,19 @@ public class AvaliacaoController {
     public List<Avaliacao> listarTodos(){
         return avaliacaoService.listarTodos();
     }
+
+    @GetMapping(path="/{id}/avaliacoes-do-user")
+    public List<Avaliacao> listarPorIdAvaliando(@PathVariable("id") Long id){
+        return avaliacaoService.listarAvaliacoesPorIDAvaliando(id);
+    }
+
+    @GetMapping(path="/{id}/avaliacoes-user-recebeu")
+    public List<Avaliacao> listarPorIdAvaliado(@PathVariable("id") Long id){
+        return avaliacaoService.listarAvaliacoesPorIDAvaliado(id);
+    }
+
+    @GetMapping(path = "/{id}/nota")
+    public String notaMediaPonderada(@PathVariable("id") Long id){
+        return avaliacaoService.mediaPonderada(id);
+    }
 }

@@ -1,6 +1,7 @@
 package com.app.LojaFairTrade.service;
 
 import com.app.LojaFairTrade.entity.AppUser;
+import com.app.LojaFairTrade.entity.AppUserRole;
 import com.app.LojaFairTrade.entity.Avaliacao;
 import com.app.LojaFairTrade.repository.AppUserRepository;
 import com.app.LojaFairTrade.repository.AvaliacaoRepository;
@@ -18,13 +19,16 @@ public class AvaliacaoServiceCompositor implements AvaliacaoServiceInterface {
     private final AppUserRepository appUserRepository;
 
     public String adicionarAvaliacao(Avaliacao avaliacao) {
-        AppUser userExists;
+        AppUser userAvaliandoExists;
+        AppUser userAvaliadoExists;
         try {
-            userExists = appUserRepository.findById(avaliacao.getIdUser()).get();
+            userAvaliandoExists = appUserRepository.findById(avaliacao.getIdUserAvaliando()).get();
+            userAvaliadoExists = appUserRepository.findById(avaliacao.getIdUserAvaliado()).get();
         } catch (NoSuchElementException ex) {
             return "Não existe tal usuário";
         }
-        avaliacao.setUsuarioAvaliado(userExists);
+        avaliacao.setUsuarioAvaliando(userAvaliandoExists);
+        avaliacao.setUsuarioAvaliado(userAvaliadoExists);
         try {
             if (avaliacao.getTextoAvaliacao().length() > 255) {
                 return "Texto de avaliação maior que 255 caracteres.";
@@ -39,11 +43,51 @@ public class AvaliacaoServiceCompositor implements AvaliacaoServiceInterface {
         return "Erro ao cadastrar avaliação";
     }
 
-    public List<Avaliacao> listarTodosPorId(Long id){
-        return avaliacaoRepository.findAllById(id);
+    public List<Avaliacao> listarAvaliacoesPorIDAvaliando(Long id){
+        return avaliacaoRepository.findAllByIdAvaliando(id);
+    }
+
+    public List<Avaliacao> listarAvaliacoesPorIDAvaliado(Long id){
+        return avaliacaoRepository.findAllByIdAvaliado(id);
     }
 
     public List<Avaliacao> listarTodos(){
         return avaliacaoRepository.findAll();
     }
+
+    public String mediaPonderada(Long id){
+        AppUser appUserAvaliado;
+        try {
+            appUserAvaliado = appUserRepository.findById(id).get();
+        } catch (NoSuchElementException ex){
+            return "Usuário Inxistente!!!";
+        }
+
+        List<Avaliacao> listaAvaliacoes = avaliacaoRepository.findAllByIdAvaliado(id);
+        Double soma = 0.0;
+        Double somaPesos = 0.0;
+        Double nota;
+
+        for (Avaliacao avaliacao : listaAvaliacoes) {
+            if(avaliacao.getUsuarioAvaliando().getAppUserRole() == AppUserRole.VIP){
+                soma += avaliacao.getNota() * 2;
+                somaPesos += 2;
+            }
+            else{
+                soma += avaliacao.getNota();
+                somaPesos++;
+            }
+        }
+
+        try {
+            nota = soma / somaPesos;
+        } catch (ArithmeticException ex){
+            return "erro: Divisão por zero";
+        }
+
+        return appUserAvaliado.getFirstName()
+                + "\n" + appUserAvaliado.getEmail()
+                + "\n nota: " + nota;
+    }
+
 }
