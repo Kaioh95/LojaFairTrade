@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(path = "api/v1/fairtradedata/avaliacao")
+//@RestController
+//@RequestMapping(path = "api/v1/fairtradedata/avaliacao")
 @AllArgsConstructor
-public class AvaliacaoController {
-    private final AvaliacaoService avaliacaoService;
+public abstract class AvaliacaoController {
+    protected final AvaliacaoService avaliacaoService;
 
     @PostMapping(path = "/")
     public String adicionaAvaliacao(@RequestBody Avaliacao avaliacao){
@@ -40,18 +40,4 @@ public class AvaliacaoController {
         return avaliacaoService.listarTodos();
     }
 
-    @GetMapping(path="/{id}/avaliacoes-do-user")
-    public List<Avaliacao> listarPorIdAvaliando(@PathVariable("id") Long id){
-        return avaliacaoService.listarAvaliacoesPorIDAvaliando(id);
-    }
-
-    @GetMapping(path="/{id}/avaliacoes-user-recebeu")
-    public List<Avaliacao> listarPorIdAvaliado(@PathVariable("id") Long id){
-        return avaliacaoService.listarAvaliacoesPorIDAvaliado(id);
-    }
-
-    @GetMapping(path = "/{id}/nota")
-    public String notaMediaPonderada(@PathVariable("id") Long id){
-        return avaliacaoService.mediaPonderada(id);
-    }
 }

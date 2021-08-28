@@ -37,4 +37,9 @@ public class ProdutoControllerConcrete extends ProdutoController{
             , @RequestParam("cepDestino") Long cepDestino){
         return produtoService.calcularFrete(id, cepDestino);
     }
+
+    @GetMapping(path = "/produtos-user/{id}")
+    public List<Produto> listarProdutosPorUser(@PathVariable("id") Long id){
+        return produtoService.listarProdutosPorUser(id);
+    }
 }

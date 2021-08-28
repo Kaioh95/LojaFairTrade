@@ -69,4 +69,8 @@ public class ProdutoService {
     public String calcularFrete(Long codigoProduto, Long cepDestino){
         return produtoServiceInterface.calcularFrete(codigoProduto, cepDestino);
     }
+
+    public List<Produto> listarProdutosPorUser(Long id){
+        return produtoServiceInterface.listarProdutosPorUser(id);
+    }
 }

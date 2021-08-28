@@ -83,4 +83,8 @@ public class ProdutoServiceCompositor implements ProdutoServiceInterface{
         String servicoCorreios = monoCorreios.block();
         return servicoCorreios;
     }
+
+    public List<Produto> listarProdutosPorUser(Long id){
+        return produtoRepository.findByUser(id);
+    }
 }
