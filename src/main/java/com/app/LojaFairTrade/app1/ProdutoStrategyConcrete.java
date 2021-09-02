@@ -5,7 +5,7 @@ import com.app.LojaFairTrade.framework.entity.Produto;
 import com.app.LojaFairTrade.framework.entity.ProdutoCategoria;
 import com.app.LojaFairTrade.framework.repository.AppUserRepository;
 import com.app.LojaFairTrade.framework.repository.ProdutoRepository;
-import com.app.LojaFairTrade.framework.service.ProdutoServiceInterface;
+import com.app.LojaFairTrade.framework.service.ProdutoStrategy;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
@@ -18,7 +18,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
-public class ProdutoServiceCompositor implements ProdutoServiceInterface {
+public class ProdutoStrategyConcrete implements ProdutoStrategy {
 
     private final ProdutoRepository produtoRepository;
     private final AppUserRepository appUserRepository;

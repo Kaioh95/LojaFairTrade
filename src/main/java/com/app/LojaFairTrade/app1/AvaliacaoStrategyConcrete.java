@@ -5,7 +5,7 @@ import com.app.LojaFairTrade.framework.entity.AppUserRole;
 import com.app.LojaFairTrade.framework.entity.Avaliacao;
 import com.app.LojaFairTrade.framework.repository.AppUserRepository;
 import com.app.LojaFairTrade.framework.repository.AvaliacaoRepository;
-import com.app.LojaFairTrade.framework.service.AvaliacaoServiceInterface;
+import com.app.LojaFairTrade.framework.service.AvaliacaoStrategy;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ import java.util.NoSuchElementException;
 
 @Service
 @AllArgsConstructor
-public class AvaliacaoServiceCompositor implements AvaliacaoServiceInterface {
+public class AvaliacaoStrategyConcrete implements AvaliacaoStrategy {
 
     private final AvaliacaoRepository avaliacaoRepository;
     private final AppUserRepository appUserRepository;

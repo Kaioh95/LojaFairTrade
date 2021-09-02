@@ -4,7 +4,7 @@ import com.app.LojaFairTrade.framework.entity.Avaliacao;
 
 import java.util.List;
 
-public interface AvaliacaoServiceInterface {
+public interface AvaliacaoStrategy {
 
     public String adicionarAvaliacao(Avaliacao avaliacao);
 

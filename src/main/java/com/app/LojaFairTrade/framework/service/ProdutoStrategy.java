@@ -5,7 +5,7 @@ import com.app.LojaFairTrade.framework.entity.ProdutoCategoria;
 
 import java.util.List;
 
-public interface ProdutoServiceInterface {
+public interface ProdutoStrategy {
 
     public String adicionarProduto(Produto produto);
 

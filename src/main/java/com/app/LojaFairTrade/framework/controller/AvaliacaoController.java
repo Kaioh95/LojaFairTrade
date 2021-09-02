@@ -1,6 +1,7 @@
 package com.app.LojaFairTrade.framework.controller;
 
 import com.app.LojaFairTrade.framework.entity.Avaliacao;
+import com.app.LojaFairTrade.framework.exceptions.AvaliacaoException;
 import com.app.LojaFairTrade.framework.service.AvaliacaoService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +26,21 @@ public abstract class AvaliacaoController {
 
     @PutMapping(path = "/")
     public String atualizaAvaliacao(@RequestBody Avaliacao avaliacao){
-        return avaliacaoService.atualizarAvaliacao(avaliacao);
+        try{
+            return avaliacaoService.atualizarAvaliacao(avaliacao);
+        }catch(AvaliacaoException ex) {
+            return ex.getMessage();
+        }
     }
 
     @DeleteMapping(path = "/{id}")
     public Avaliacao removeAvaliacao(@PathVariable("id") Long id){
-        return avaliacaoService.removerAvaliacao(id);
+        try{
+            return avaliacaoService.removerAvaliacao(id);
+        }catch(AvaliacaoException ex){
+            System.out.println(ex.getMessage());
+            return null;
+        }
     }
 
     @GetMapping(path = "/")

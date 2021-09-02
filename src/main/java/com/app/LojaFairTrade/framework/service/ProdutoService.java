@@ -13,11 +13,7 @@ import java.util.List;
 public class ProdutoService {
 
     private final ProdutoRepository produtoRepository;
-    private final ProdutoServiceInterface produtoServiceInterface;
-
-    public String adicionarProduto(Produto produto){
-        return produtoServiceInterface.adicionarProduto(produto);
-    }
+    private final ProdutoStrategy produtoStrategy;
 
     public Produto lerProduto(Long id){
         return produtoRepository.findById(id).orElseThrow();
@@ -48,27 +44,31 @@ public class ProdutoService {
         }
     }
 
+    public String adicionarProduto(Produto produto){
+        return produtoStrategy.adicionarProduto(produto);
+    }
+
     public List<Produto> pesquisarNome(String nome){
-        return produtoServiceInterface.pesquisarNome(nome);
+        return produtoStrategy.pesquisarNome(nome);
     }
 
     public List<Produto> compararPrecos(){
-        return produtoServiceInterface.compararPrecos();
+        return produtoStrategy.compararPrecos();
     }
 
     public List<Produto> todosProdutos(){
-        return produtoServiceInterface.todosProdutos();
+        return produtoStrategy.todosProdutos();
     }
 
     public List<Produto> listarCategoria(ProdutoCategoria categoria){
-        return produtoServiceInterface.listarCategoria(categoria);
+        return produtoStrategy.listarCategoria(categoria);
     }
 
     public String calcularFrete(Long codigoProduto, Long cepDestino){
-        return produtoServiceInterface.calcularFrete(codigoProduto, cepDestino);
+        return produtoStrategy.calcularFrete(codigoProduto, cepDestino);
     }
 
     public List<Produto> listarProdutosPorUser(Long id){
-        return produtoServiceInterface.listarProdutosPorUser(id);
+        return produtoStrategy.listarProdutosPorUser(id);
     }
 }
