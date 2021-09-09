@@ -18,8 +18,8 @@ public interface ProdutoRepository extends JpaRepository<Produto, Long> {
     @Query("SELECT p FROM Produto p WHERE LOWER(p.nome) LIKE CONCAT('%', LOWER(?1), '%')")
     List<Produto> findByNome(String nome);
 
-    @Query("SELECT p FROM Produto p ORDER BY p.preco ASC")
-    List<Produto> ordernarPorPreco();
+    @Query("SELECT p FROM Produto p WHERE p.preco BETWEEN ?1 AND ?2")
+    List<Produto> produtosIntervaloPreco(float p1, float p2);
 
     @Query("SELECT p FROM Produto p WHERE p.categoria = ?1")
     List<Produto> findByCategoria(ProdutoCategoria categoria);

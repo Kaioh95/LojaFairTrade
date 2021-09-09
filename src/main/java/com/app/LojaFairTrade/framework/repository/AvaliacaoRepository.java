@@ -12,9 +12,6 @@ import java.util.List;
 @Transactional(readOnly = true)
 public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 
-    @Query("SELECT a FROM Avaliacao a WHERE a.usuarioAvaliado.id = ?1")
-    List<Avaliacao> findAllByIdAvaliado(Long idUsuarioAvaliado);
-
-    @Query("SELECT a FROM Avaliacao a WHERE a.usuarioAvaliando.id = ?1")
-    List<Avaliacao> findAllByIdAvaliando(Long idUsuarioAvaliado);
+    @Query("SELECT a FROM Avaliacao a WHERE a.produto.id = ?1")
+    List<Avaliacao> findAllByIdProduto(Long idProdutoAvaliado);
 }

@@ -11,13 +11,11 @@ public interface ProdutoStrategy {
 
     public List<Produto> pesquisarNome(String nome);
 
-    public List<Produto> compararPrecos();
+    public List<Produto> buscarCategoria(ProdutoCategoria categoria);
+
+    public List<Produto> produtosIntervaloPreco(float p1, float p2);
 
     public List<Produto> todosProdutos();
 
-    public List<Produto> listarCategoria(ProdutoCategoria categoria);
-
     public String calcularFrete(Long codigoProduto, Long cepDestino);
-
-    public List<Produto> listarProdutosPorUser(Long id);
 }

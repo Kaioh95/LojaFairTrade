@@ -26,20 +26,15 @@ public class Avaliacao {
     private long id;
 
     @Transient
-    private Long idUserAvaliando;
+    Long idProdutoAvaliado;
+
     @ManyToOne
-    private AppUser usuarioAvaliando;
-    @Transient
-    private Long idUserAvaliado;
-    @ManyToOne
-    private AppUser usuarioAvaliado;
+    Produto produto;
 
     private float nota;
     private String textoAvaliacao;
 
-    public Avaliacao(AppUser usuarioAvaliando, AppUser usuarioAvaliado, float nota, String textoAvaliacao){
-        this.usuarioAvaliando = usuarioAvaliando;
-        this.usuarioAvaliado = usuarioAvaliado;
+    public Avaliacao(float nota, String textoAvaliacao){
         this.nota = nota;
         this.textoAvaliacao = textoAvaliacao;
     }

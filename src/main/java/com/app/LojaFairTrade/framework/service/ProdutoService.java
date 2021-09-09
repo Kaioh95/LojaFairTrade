@@ -52,23 +52,19 @@ public class ProdutoService {
         return produtoStrategy.pesquisarNome(nome);
     }
 
-    public List<Produto> compararPrecos(){
-        return produtoStrategy.compararPrecos();
+    public List<Produto> buscarIntervalopreco(float p1, float p2){
+        return produtoStrategy.produtosIntervaloPreco(p1, p2);
     }
 
     public List<Produto> todosProdutos(){
         return produtoStrategy.todosProdutos();
     }
 
-    public List<Produto> listarCategoria(ProdutoCategoria categoria){
-        return produtoStrategy.listarCategoria(categoria);
+    public List<Produto> buscarPorCategoria(ProdutoCategoria categoria){
+        return produtoStrategy.buscarCategoria(categoria);
     }
 
     public String calcularFrete(Long codigoProduto, Long cepDestino){
         return produtoStrategy.calcularFrete(codigoProduto, cepDestino);
-    }
-
-    public List<Produto> listarProdutosPorUser(Long id){
-        return produtoStrategy.listarProdutosPorUser(id);
     }
 }

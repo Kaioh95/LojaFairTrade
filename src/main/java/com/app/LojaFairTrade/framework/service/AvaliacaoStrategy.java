@@ -8,11 +8,9 @@ public interface AvaliacaoStrategy {
 
     public String adicionarAvaliacao(Avaliacao avaliacao);
 
-    public List<Avaliacao> listarAvaliacoesPorIDAvaliando(Long id);
-
-    public List<Avaliacao> listarAvaliacoesPorIDAvaliado(Long id);
-
     public List<Avaliacao> listarTodos();
 
-    public String mediaPonderada(Long id);
+    public List<Avaliacao> listarAvaliacoesProduto(Long id);
+
+    public String mediaAritmetica(Long id);
 }

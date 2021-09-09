@@ -44,19 +44,15 @@ public class AvaliacaoService {
         }
     }
 
-    public List<Avaliacao> listarAvaliacoesPorIDAvaliando(Long id){
-        return avaliacaoStrategy.listarAvaliacoesPorIDAvaliando(id);
-    }
-
-    public List<Avaliacao> listarAvaliacoesPorIDAvaliado(Long id){
-        return avaliacaoStrategy.listarAvaliacoesPorIDAvaliado(id);
-    }
-
     public List<Avaliacao> listarTodos(){
         return avaliacaoStrategy.listarTodos();
     }
 
-    public String mediaPonderada(Long id){
-        return avaliacaoStrategy.mediaPonderada(id);
+    public List<Avaliacao> listarPorProduto(Long id){
+        return avaliacaoStrategy.listarAvaliacoesProduto(id);
+    }
+
+    public String mediaAritmetica(Long id){
+        return avaliacaoStrategy.mediaAritmetica(id);
     }
 }
