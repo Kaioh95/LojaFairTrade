@@ -1,4 +1,4 @@
-package com.app.LojaFairTrade.app1;
+package com.app.LojaFairTrade.app3;
 
 import com.app.LojaFairTrade.framework.controller.ProdutoController;
 import com.app.LojaFairTrade.framework.entity.Produto;
@@ -36,10 +36,5 @@ public class ProdutoControllerConcrete extends ProdutoController {
     public String calcularFrete(@PathVariable("id") Long id
             , @RequestParam("cepDestino") Long cepDestino){
         return produtoService.calcularFrete(id, cepDestino);
-    }
-
-    @GetMapping(path = "/produtos-user/{id}")
-    public List<Produto> listarProdutosPorUser(@PathVariable("id") Long id){
-        return produtoService.listarProdutosPorUser(id);
     }
 }

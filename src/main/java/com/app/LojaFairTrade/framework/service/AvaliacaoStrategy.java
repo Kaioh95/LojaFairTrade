@@ -14,5 +14,7 @@ public interface AvaliacaoStrategy {
 
     public List<Avaliacao> listarTodos();
 
-    public String mediaPonderada(Long id);
+    public Object nota(Long id);
+
+    public Object rankCritica();
 }

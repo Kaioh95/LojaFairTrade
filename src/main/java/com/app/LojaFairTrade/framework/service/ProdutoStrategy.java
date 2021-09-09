@@ -18,6 +18,4 @@ public interface ProdutoStrategy {
     public List<Produto> listarCategoria(ProdutoCategoria categoria);
 
     public String calcularFrete(Long codigoProduto, Long cepDestino);
-
-    public List<Produto> listarProdutosPorUser(Long id);
 }

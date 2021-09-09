@@ -1,6 +1,7 @@
-package com.app.LojaFairTrade.app1;
+package com.app.LojaFairTrade.app3;
 
 import com.app.LojaFairTrade.framework.entity.AppUser;
+import com.app.LojaFairTrade.framework.entity.AppUserRole;
 import com.app.LojaFairTrade.framework.entity.Produto;
 import com.app.LojaFairTrade.framework.entity.ProdutoCategoria;
 import com.app.LojaFairTrade.framework.repository.AppUserRepository;
@@ -33,12 +34,12 @@ public class ProdutoStrategyConcrete implements ProdutoStrategy {
             return "Não existe tal usuário";
         }
 
-        /*try {
+        try {
             if (userExists.getAppUserRole() != AppUserRole.SHOP)
                 throw new IllegalAccessException();
         }catch(IllegalAccessException e){
             return "Operação Ilegal: Não é possível cadastrar produto";
-        }*/
+        }
 
         produto.setUsuarioProduto(userExists);
         try{
@@ -85,7 +86,4 @@ public class ProdutoStrategyConcrete implements ProdutoStrategy {
         return servicoCorreios;
     }
 
-    public List<Produto> listarProdutosPorUser(Long id){
-        return produtoRepository.findByUser(id);
-    }
 }

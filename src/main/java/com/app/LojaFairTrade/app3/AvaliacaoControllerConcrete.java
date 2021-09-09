@@ -1,4 +1,4 @@
-package com.app.LojaFairTrade.app1;
+package com.app.LojaFairTrade.app3;
 
 import com.app.LojaFairTrade.framework.controller.AvaliacaoController;
 import com.app.LojaFairTrade.framework.entity.Avaliacao;
@@ -29,7 +29,12 @@ public class AvaliacaoControllerConcrete extends AvaliacaoController {
     }
 
     @GetMapping(path = "/{id}/nota")
-    public String notaMediaPonderada(@PathVariable("id") Long id){
-        return avaliacaoService.mediaPonderada(id);
+    public Object notaMedia(@PathVariable("id") Long id){
+        return avaliacaoService.notas(id);
+    }
+
+    @GetMapping(path = "/rank")
+    public Object rankingNotaCritica(){
+        return avaliacaoService.rankearPorNotaCritica();
     }
 }

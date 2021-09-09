@@ -2,6 +2,7 @@ package com.app.LojaFairTrade.framework.entity;
 
 public enum AppUserRole {
     USER,
-    VIP,
+    CRITIC,
+    SHOP,
     ADMIN
 }

@@ -56,7 +56,11 @@ public class AvaliacaoService {
         return avaliacaoStrategy.listarTodos();
     }
 
-    public String mediaPonderada(Long id){
-        return avaliacaoStrategy.mediaPonderada(id);
+    public Object notas(Long id){
+        return avaliacaoStrategy.nota(id);
+    }
+
+    public Object rankearPorNotaCritica(){
+        return avaliacaoStrategy.rankCritica();
     }
 }

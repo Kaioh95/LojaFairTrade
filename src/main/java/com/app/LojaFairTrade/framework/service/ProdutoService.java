@@ -68,7 +68,4 @@ public class ProdutoService {
         return produtoStrategy.calcularFrete(codigoProduto, cepDestino);
     }
 
-    public List<Produto> listarProdutosPorUser(Long id){
-        return produtoStrategy.listarProdutosPorUser(id);
-    }
 }
